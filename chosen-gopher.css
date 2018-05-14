@@ -1,0 +1,18 @@
+/*!
+Gopher, a Plugnin for jQuery-Chosen
+
+Version 0.0.0
+*/
+
+.gopher-chosen.chosen-container:not(.chosen-container-active) {
+    display: none;
+}
+
+.gopher-chosen.chosen-container {
+    z-index: 100;
+}
+
+.gopherSelect-trigger-input {
+    width: 100%;
+    cursor: pointer;
+}

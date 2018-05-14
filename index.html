@@ -1,0 +1,421 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Gopher:A Plugin for jQuery Chosen</title>
+  <meta name="description" content="Gopher:A Plugin for jQuery Chosen">
+  <meta name="author" content="lulualulu.com">
+
+  <!-- jQuery 3.3.1 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- Chosen 1.85 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
+  <!-- <link rel="stylesheet" href="chosen.css">
+  <script src="chosen.jQuery.js"></script> -->
+
+  <!-- Gopher -->
+  <link rel="stylesheet" href="chosen-gopher.css?v=1.0">
+  <script src="chosen-gopher.js"></script>
+  <style>
+    input:focus {
+      background-color: yellow;
+    }
+
+    .showCompulsory {
+      display: inline !important;
+    }
+
+    .child-select {
+      width: 200px;
+    }
+
+    .imbig {
+      font-size: 30px;
+    }
+
+    .red {
+      background: red;
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      init();
+    });
+
+    function init() {
+      createSourceOptions();
+      showSourceOptionCount();
+      startChosen($("#source_select"));
+      //Event
+      $("#cb_show_source_select").change(function () {
+        showHideSourceSelect($(this).is(':checked'));
+      });
+      $("#cb_show_child_select").change(function () {
+        showHideChildSelect($(this).is(':checked'));
+      });
+      $("#cb_show_chosen_select").change(function () {
+        showHideChosenSelect($(this).is(':checked'));
+      });
+      $("#btn_common").click(function () {
+        createChildSelectCommon();
+      });
+      $("#btn_chosen").click(function () {
+        createChildSelectChosen();
+      });
+      $("#btn_gopher").click(function () {
+        createChildSelectCGopher();
+      });
+      $("#btn_demo_clean_select_go").click(function () {
+        cleanSelectGo();
+      });
+      $("#btn_demo_clean_select_refresh").click(function () {
+        cleanSelectRefresh();
+      });
+      $("#btn_demo_inherit_classes_go").click(function () {
+        inheritClassesGo();
+      });
+      $("#btn_demo_inherit_classes_refresh").click(function () {
+        inheritClassesRefresh();
+      });
+      $("#btn_demo_input_class_go").click(function () {
+        inputClassGo();
+      });
+      $("#btn_demo_input_class_refresh").click(function () {
+        inputClassRefresh();
+      });
+      $("#btn_demo_destroy_go").click(function () {
+        destroyGo();
+      });
+      $("#btn_demo_destroy_refresh").click(function () {
+        destroyRefresh();
+      });
+      $("#btn_demo_set_value_go").click(function () {
+        setValueGo();
+      });
+      $("#btn_demo_set_value_refresh").click(function () {
+        setValueRefresh();
+      });
+      //Demo
+      initDemo();
+    }
+
+    function initDemo() {
+      $('#demo_select_default_msg').gopher({
+        main_select: document.getElementById('source_select'),
+        default_msg: "Is My Default Message",
+      });
+      cleanSelectRefresh();
+      inheritClassesRefresh();
+      inputClassRefresh();
+      destroyRefresh();
+      setValueRefresh();
+    }
+
+    function cleanSelectGo() {
+      $('#demo_select_clean_select').gopher({
+        main_select: document.getElementById('source_select'),
+        clean_select: document.getElementById("cb_demo_clean_select").checked,
+      });
+    }
+
+    function cleanSelectRefresh() {
+      $("#demo_select_clean_select").gopher("destroy");
+      $('#demo_select_clean_select').html(new Option('My option before go gopher', 0, true, true).outerHTML);
+    }
+
+    function inheritClassesGo() {
+      $('#demo_select_inherit_classes').gopher({
+        main_select: document.getElementById('source_select'),
+        inherit_select_classes: document.getElementById("cb_demo_inherit_classes").checked,
+      });
+    }
+
+    function inheritClassesRefresh() {
+      $("#demo_select_inherit_classes").gopher("destroy");
+      $('#demo_select_inherit_classes').html(new Option('I\'m big', 0, true, true).outerHTML);
+    }
+
+    function inputClassGo() {
+      $('#demo_select_input_class').gopher({
+        main_select: document.getElementById('source_select'),
+        input_class: document.getElementById("tb_demo_input_class").value,
+      });
+    }
+
+    function inputClassRefresh() {
+      $("#demo_select_input_class").gopher("destroy");
+      $('#demo_select_input_class').html(new Option('Give me a class', 0, true, true).outerHTML);
+    }
+
+    function destroyGo() {
+      $("#demo_select_destroy").gopher("destroy");
+    }
+
+    function destroyRefresh() {
+      $('#demo_select_destroy').gopher({
+        main_select: document.getElementById('source_select'),
+      });
+    }
+
+    function setValueGo() {
+      var value = $('#tb_demo_set_value').val();
+      $("#demo_select_set_value").trigger("gopher:set", value);
+    }
+
+    function setValueRefresh() {
+      $('#demo_select_set_value').gopher({
+        main_select: document.getElementById('source_select'),
+        clean_select: true
+      });
+    }
+
+    function startGopher(select) {
+      $(select).gopher({
+        main_select: document.getElementById('source_select'),
+        inherit_select_classes: false,
+        clean_select: false,
+      });
+    }
+
+    function startChosen(select) {
+      $(select).chosen({
+        none_choosed_text: "My Chosen Choosed Text",
+        modal_title_text: "My Chosen Title",
+        width: "200px",
+        allow_single_deselect: true,
+        search_contains: true
+      });
+    }
+
+    function showHideSourceSelect(isShow) {
+      if (isShow) {
+        $('#source_select').addClass('showCompulsory')
+
+      } else {
+        $('#source_select').removeClass('showCompulsory')
+      }
+    }
+
+    function showHideChosenSelect(isShow) {
+      if (isShow) {
+        $('.gopher-chosen.chosen-container').addClass('showCompulsory')
+
+      } else {
+        $('.gopher-chosen.chosen-container').removeClass('showCompulsory')
+      }
+    }
+
+    function showHideChildSelect(isShow) {
+      if (isShow) {
+        $('.child-select').addClass('showCompulsory')
+
+      } else {
+        $('.child-select').removeClass('showCompulsory')
+      }
+    }
+
+    function createSourceOptions() {
+      appendOption($("#source_select"));
+    }
+
+    function appendOption(select) {
+      var count = 5000;
+      var optionArray = [];
+      for (var i = 0; i < count; i++) {
+        var id = i;
+        var name = "Test Option :" + i;
+        optionArray.push(new Option(name, id, false, false).outerHTML);
+      }
+      $(select).html(optionArray.join(""));
+    }
+
+    function createChildSelectCommon() {
+      var startDate = new Date();
+      createChildSelect();
+      appendOption($("#child_select_list").find('select'));
+      var endDate = new Date();
+      var mseconds = (endDate.getTime() - startDate.getTime());
+      $('#tb_time_cost').val(mseconds);
+    }
+
+    function createChildSelectChosen() {
+      var startDate = new Date();
+      createChildSelect();
+      appendOption($("#child_select_list").find('select'));
+      startChosen($("#child_select_list").find('select'));
+      var endDate = new Date();
+      var mseconds = (endDate.getTime() - startDate.getTime());
+      $('#tb_time_cost').val(mseconds);
+    }
+
+    function createChildSelectCGopher() {
+      var startDate = new Date();
+      createChildSelect();
+      startGopher($("#child_select_list").find('select'));
+      var endDate = new Date();
+      var mseconds = (endDate.getTime() - startDate.getTime());
+      $('#tb_time_cost').val(mseconds);
+    }
+
+    function createChildSelect() {
+      var count = 10;
+      var selectionArray = [];
+      for (var i = 0; i < count; i++) {
+        var selectList = document.createElement("select");
+        selectList.id = "chid_select_" + i;
+        selectList.className = "child-select";
+        selectionArray.push(selectList.outerHTML);
+      }
+      $("#child_select_list").html(selectionArray.join(""));
+      $("#child_select_list").find('select').change(function (event) {
+        var select = event.target;
+        $('#tb_my_value').val($(select).val());
+      })
+    }
+
+    function showSourceOptionCount() {
+      var count = $('#source_select').find('option').length;
+      $('#lab_source_select').text('Source Select(' + count + ")")
+    }
+
+    function showFocus() {
+      setInterval(function () {
+        console.log($(':focus')[0]);
+      }, 30000)
+    }
+  </script>
+</head>
+
+<body>
+  <div class="page-header">
+    <h1>Gopher
+      <small>A plugin for jQuery.Chosen, to improve efficiency when duplicate selection.</small>
+    </h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <h4>Create my select:</h4>
+    </div>
+    <div class="row">
+      <label id="lab_source_select" for="source_select"> Source Select</label>
+      <select id="source_select" class="showCompulsory"></select>
+    </div>
+
+    <div class="row">
+      <label for="tb_time_cost"> Time Cost(millisecond)</label>
+      <input type="text" id="tb_time_cost" readonly>
+    </div>
+
+    <div class="row">
+      <label for="tb_my_value"> My Pick Up Value</label>
+      <input type="text" id="tb_my_value" readonly>
+    </div>
+    <div class="row">
+      <button type="button" id="btn_common">Common Select</button>
+      <button type="button" id="btn_chosen">Chosen Select</button>
+      <button type="button" id="btn_gopher">Gopher Select</button>
+    </div>
+    <div class="row" id="child_select_list">
+
+    </div>
+    <br>
+    <div class="row">
+      <h4>Config:</h4>
+    </div>
+    <div class="row">
+      <label for="demo_select_default_msg"> default_msg:</label>
+      <select id="demo_select_default_msg" class="child-select"></select>
+    </div>
+    <br>
+    <div class="row">
+      <label for="demo_select_clean_select"> clean_select:</label>
+      <select id="demo_select_clean_select" class="child-select">
+        <option>My option before go gopher</option>
+      </select>
+      <label>
+        <input type="checkbox" id="cb_demo_clean_select"> true/false
+      </label>
+      <button type="button" id="btn_demo_clean_select_go">Go gopher</button>
+      <button type="button" id="btn_demo_clean_select_refresh">Refresh</button>
+    </div>
+    <br>
+    <div class="row">
+      <label for="demo_select_inherit_classes"> inherit_select_classes:</label>
+      <select id="demo_select_inherit_classes" class="child-select imbig">
+        <option>I'm big</option>
+      </select>
+      <label>
+        <input type="checkbox" id="cb_demo_inherit_classes"> true/false
+      </label>
+      <button type="button" id="btn_demo_inherit_classes_go">Go gopher</button>
+      <button type="button" id="btn_demo_inherit_classes_refresh">Refresh</button>
+    </div>
+    <br>
+    <div class="row">
+      <label for="demo_select_input_class"> input_class:</label>
+      <select id="demo_select_input_class" class="child-select">
+        <option>Give me a class</option>
+      </select>
+      <label>Class Name</label>
+      <input type="text" id="tb_demo_input_class" placeholder="red">
+      <button type="button" id="btn_demo_input_class_go">Go gopher</button>
+      <button type="button" id="btn_demo_input_class_refresh">Refresh</button>
+    </div>
+    <br>
+    <div class="row">
+      <h4>Action:</h4>
+    </div>
+    <div class="row">
+      <label for="demo_select_destroy"> destroy:</label>
+      <select id="demo_select_destroy" class="child-select">
+        <option>I'm back </option>
+      </select>
+      <button type="button" id="btn_demo_destroy_go">Destroy gopher</button>
+      <button type="button" id="btn_demo_destroy_refresh">Refresh</button>
+    </div>
+    <br>
+    <div class="row">
+      <label for="demo_select_set_value"> set_value:</label>
+      <select id="demo_select_set_value" class="child-select">
+      </select>
+      <label>Set value</label>
+      <input type="number" id="tb_demo_set_value">
+      <button type="button" id="btn_demo_set_value_go">Set gopher</button>
+      <button type="button" id="btn_demo_set_value_refresh">Refresh</button>
+    </div>
+    <div class="row">
+      <h4>Element Show Hide:</h4>
+    </div>
+    <div class="row">
+      <input type="checkbox" name="" id="cb_show_source_select" checked/>
+      <label for="cb_show_source_select">Show Main Select
+      </label>
+      <input type="checkbox" name="" id="cb_show_child_select" />
+      <label for="cb_show_child_select">Show Child Select
+      </label>
+      <input type="checkbox" name="" id="cb_show_chosen_select" />
+      <label for="cb_show_chosen_select">Show Chosen Select
+      </label>
+    </div>
+    <br>
+  </div>
+</body>
+
+</html>
