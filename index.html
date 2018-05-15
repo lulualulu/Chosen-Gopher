@@ -250,6 +250,7 @@
       var startDate = new Date();
       createChildSelect();
       appendOption($("#child_select_list").find('select'));
+      $("#child_select_list").find('select').val('-1')
       var endDate = new Date();
       var mseconds = (endDate.getTime() - startDate.getTime());
       $('#tb_time_cost').val(mseconds);
@@ -259,6 +260,7 @@
       var startDate = new Date();
       createChildSelect();
       appendOption($("#child_select_list").find('select'));
+      $("#child_select_list").find('select').val('-1')
       startChosen($("#child_select_list").find('select'));
       var endDate = new Date();
       var mseconds = (endDate.getTime() - startDate.getTime());
