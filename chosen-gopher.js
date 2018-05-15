@@ -5,6 +5,8 @@ Version 1.0.0
 
 Full source at https://github.com/lulualulu/Chosen-Gopher
 Copyright (c) 2018 Psyduck http://lulualulu.com
+
+MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 */
 
 
