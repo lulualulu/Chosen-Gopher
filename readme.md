@@ -44,7 +44,7 @@ Hello there, **Gopher** is a plugin for **jQuery.Chosen**, to improve efficiency
         main_select: document.getElementById('source_select'),
       });
 	```
-* All child-select already inheritanced from source-select:
+* All child-select already inheritance from source-select:
 
 	<select class="child-select">
     <option> I same as source</option>
