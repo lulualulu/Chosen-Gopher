@@ -1,7 +1,7 @@
-#Gopher
+# Gopher
 Hello there, **Gopher** is a plugin for **jQuery.Chosen**, to improve efficiency when duplicate selection.
 ***
-##Demo
+## Demo
 [![Click here](https://img.youtube.com/vi/LMUztamX0WY/0.jpg)](https://www.youtube.com/watch?v=LMUztamX0WY)
 
 ### Demo page
@@ -66,12 +66,12 @@ Hello there, **Gopher** is a plugin for **jQuery.Chosen**, to improve efficiency
     </select>
 
 ***
-##Support
+## Support
 * jQuery 1.7+
 * Chosen 1.85+
 
 
 ****
 
-##Reference
+## Reference
 * Chosen [harvesthq/chosen](https://github.com/harvesthq/chosen)
