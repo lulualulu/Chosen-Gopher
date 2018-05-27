@@ -169,8 +169,10 @@
     }
 
     function destroyRefresh() {
+      $('#demo_select_destroy').html(new Option('I will back to select', 0, true, true).outerHTML);
       $('#demo_select_destroy').gopher({
         main_select: document.getElementById('source_select'),
+        clean_select: false,
       });
     }
 
@@ -387,7 +389,7 @@
     <div class="row">
       <label for="demo_select_destroy"> destroy:</label>
       <select id="demo_select_destroy" class="child-select">
-        <option>I'm back </option>
+        <option>I will back to select </option>
       </select>
       <button type="button" id="btn_demo_destroy_go">Destroy gopher</button>
       <button type="button" id="btn_demo_destroy_refresh">Refresh</button>
