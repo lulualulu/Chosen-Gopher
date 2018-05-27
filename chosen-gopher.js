@@ -1,7 +1,7 @@
 /*!
 Gopher, a Plugnin for jQuery-Chosen
 by Psyduck http://lulualulu.com
-Version 1.0.0
+Version 1.0.1
 
 Full source at https://github.com/lulualulu/Chosen-Gopher
 Copyright (c) 2018 Psyduck http://lulualulu.com
@@ -11,6 +11,15 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 
 
 (function ($) {
+
+	$.event.special.destroyed = {
+		remove: function (o) {
+			if (o.handler) {
+				o.handler();
+			}
+		}
+	};
+
 	var $, Gopher,
 		bind = function (fn, me) {
 			return function () {
@@ -311,6 +320,12 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 					_this.set_value(evt, val);
 				};
 			})(this));
+			$(this.form_field).on('destroyed', (function (_this) {
+				return function (evt) {
+					console.log('chosen remove');
+					_this.destroy();
+				};
+			})(this));
 		};
 
 		Gopher.prototype.keydown_checker = function (evt) {
@@ -351,6 +366,8 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 
 		//Destory Gopher
 		Gopher.prototype.destroy = function () {
+			$(this.trigger_input).removeClass('gopher-active-input');
+			$(this.trigger_input).removeClass('gopher-focus-back');
 			this.container.remove();
 			this.form_field_jq.show();
 			this.form_field_jq.removeData('gopher');
