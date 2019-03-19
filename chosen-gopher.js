@@ -282,7 +282,10 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 			$(this.trigger_input).on('mousedown.gopher', (function (_this) {
 				return function (evt) {
 					evt.preventDefault();
-					_this.input_on_mousedown(evt);
+					setTimeout(function () {
+						_this.input_on_mousedown(evt);
+					}, 150);
+
 				};
 			})(this));
 			$(this.trigger_input).on('keydown.gopher', (function (_this) {
