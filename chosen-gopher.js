@@ -359,18 +359,41 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 		};
 
 		Gopher.prototype.set_tag = function () {
-			$('.gopher-active-input').removeClass('gopher-active-input');
-			$(this.trigger_input).addClass('gopher-active-input');
+			var className = 'gopher-active-input';
+			var lsActive = document.getElementsByClassName(className);
+			for (let i = 0; i < lsActive.length; i++) {
+				const ele = lsActive[i];
+				ele.classList.remove(className);
+			}
+			this.trigger_input[0].classList.add(className);
+			// $('.gopher-active-input').removeClass('gopher-active-input');
+			// $(this.trigger_input).addClass('gopher-active-input');
 		};
 		Gopher.prototype.set_focus_tag = function () {
-			$('.gopher-active-input').removeClass('gopher-focus-back');
-			$(this.trigger_input).addClass('gopher-focus-back');
+			var className = 'gopher-focus-back';
+			var lsFocus = document.getElementsByClassName(className);
+			for (let i = 0; i < lsFocus.length; i++) {
+				const ele = lsFocus[i];
+				ele.classList.remove(className);
+			}
+			this.trigger_input[0].classList.add(className);
+			// $('.gopher-active-input').removeClass('gopher-focus-back');
+			// $(this.trigger_input).addClass('gopher-focus-back');
 		};
 
 		//Destory Gopher
 		Gopher.prototype.destroy = function () {
 			$(this.trigger_input).removeClass('gopher-active-input');
 			$(this.trigger_input).removeClass('gopher-focus-back');
+			$(this.trigger_input).off('focus.gopher');
+			$(this.trigger_input).off('mousedown.gopher');
+			$(this.trigger_input).off('keydown.gopher');
+			$(this.trigger_input).off('focus.gopher');
+			$(this.trigger_input).off('focus.gopher');
+			$(this.trigger_input).off('focus.gopher');
+			$(this.form_field_jq).off('gopher:set.gopher');
+			$(this.form_field).off('destroyed');
+
 			this.container.remove();
 			this.form_field_jq.show();
 			this.form_field_jq.removeData('gopher');
