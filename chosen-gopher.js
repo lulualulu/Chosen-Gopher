@@ -146,7 +146,9 @@ MIT License, https://github.com/lulualulu/Chosen-Gopher/blob/master/license.md
 		//Set attribute
 		Gopher.prototype.set_up_attr = function () {
 			$(this.trigger_input)[0].setAttribute("tabIndex", this.form_field.tabIndex);
-			$(this.main_chosen).find('.chosen-focus-input')[0].removeAttribute("tabIndex");
+			var focusInput = $(this.main_chosen).find('.chosen-focus-input')[0];
+			if(focusInput)
+				focusInput.removeAttribute("tabIndex");
 		};
 		//Triggered after Gopher has been fully instantiated.
 		Gopher.prototype.on_ready = function () {
